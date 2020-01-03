@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Travel App</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="app">
+      <h1 class="holder headline">
+        My Travel App
+      </h1>
+      <div class="holder-trip" id="holder-destination">
+        <div id="destination">
+          <h2>Where do you want to go?</h2>
+        </div>
+      </div>
+
+      <div class="destination-details">
+        <label for="new-city"><h3>I'm going to:</h3></label>
+        <input type="new-text" id="travel-to-city"
+                placeholder="Enter Location Here">
+        <span class="focus-border">
+      </div>
+
+      <div class="date-entry">
+        <label for="travel-date"><h3>Departing</h3></label>
+        <span class="focus-border">
+        <input type="date" id="new-travel-date" min="2019-12-31" max="2022-12-31">
+      </div>
+        <button name="button" id="save-trip-button" onclick="Client.handleSubmit(event)">Save Trip</button>
+      </div>
+      
+      <div class="travel-details" id="next-trip-holder">
+        
+
+      </div>
+      <img src="" id="trip-image">
+      
+      </div>
+    </div>
+    
+  </body>
+</html>
