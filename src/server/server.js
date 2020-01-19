@@ -1,8 +1,9 @@
 const dotenv = require("dotenv");
 dotenv.config();
-
-var async  = require('express-async-await')
-var fetch = require('node-fetch')
+ 
+var async  = require('express-async-await');
+var moment = require('moment');
+var fetch = require('node-fetch');
 // Require Express to run server and routes
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -34,10 +35,10 @@ const server = app.listen(port, () => {
     console.log(`server is running on port: ${port}`);
 });
 
-app.get('/', async (req, res) => {
-    
-    const geonamesUrl = `${geoNamesApiBaseUrl}${req.query.city}`;
-    
+app.post("/test", async (req, res) => {
+    console.log(req.body);
+    const geonamesUrl = `${geoNamesApiBaseUrl}${req.body.cityName}`;
+    console.log("this is url of geonames",geonamesUrl);
     const geonamesResponse = await fetch(geonamesUrl, {
         method: "GET",
         headers: {
@@ -45,7 +46,7 @@ app.get('/', async (req, res) => {
     });
     const geonamesResult = await geonamesResponse.json();
     const firstGeonameCity = geonamesResult.geonames[0];
-    console.log(firstGeonameCity);
+    console.log("this is the first geoname city:", firstGeonameCity);
 
     const darkSkyUrl = `${darkSkyApiBaseUrl}/${firstGeonameCity.lat},${firstGeonameCity.lng}`;
     const darkSkyResponse = await fetch(darkSkyUrl, {
@@ -54,7 +55,7 @@ app.get('/', async (req, res) => {
         "Content-Type": "application/json"}
     });
     const darkSkyResult = await darkSkyResponse.json();
-    console.log(darkSkyResult);
+    console.log("this is the weather result:",darkSkyResult);
 
     const pixabayUrl = `${pixabayApiBaseUrl}${firstGeonameCity.name}`;
     const pixabayResponse = await fetch(pixabayUrl, {
@@ -65,7 +66,17 @@ app.get('/', async (req, res) => {
     });
     const pixabayResult = await pixabayResponse.json();
     const firstPixabayPhoto = pixabayResult.hits[0];
-    console.log(pixabayResult);
+    console.log("this is the picture result", pixabayResult);
+
+    //create a moment object parsed by the date given by the user
+    const departmoment = moment(req.body.departingDate);
+    const departformat = departmoment.format('MMM Do YYYY');
+
+    //create a moment object with current date in same format as input
+    const now = moment().format('YYYY-MM-DD');
+
+    //calculate the days left
+    const deadline = departmoment.diff(now, 'days');
 
     res.send(JSON.stringify({
         photoURL: firstPixabayPhoto.largeImageURL,
@@ -73,7 +84,6 @@ app.get('/', async (req, res) => {
         cityLng: firstGeonameCity.lng,
         cityLat: firstGeonameCity.lat,
         weather: darkSkyResult.currently.temperature,
-        daysToGo: '122',
-        departDate: req.query.date},))
-});
-
+        daysToGo: deadline,
+        departDate: req.body.departingDate}))
+})

@@ -12,7 +12,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
         libraryTarget: 'var',
-        library: 'Cilent'
+        library: 'Client'
     },
     mode: 'production',
     devServer: {

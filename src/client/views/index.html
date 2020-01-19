@@ -12,37 +12,45 @@
   <body>
     <div id="app">
       <h1 class="holder headline">
-        My Travel App
+        Travel Planner
       </h1>
-      <div class="holder-trip" id="holder-destination">
-        <div id="destination">
-          <h2>Where do you want to go?</h2>
+      <div id="trip-search-container">
+        <div class="trip-input">
+          <label for="destination"><h3>I'm going to:</h3></label>
+          <input type="text" id="travel-to-city" name="destination"
+                  placeholder="Enter Location Here">
+          <span class="focus-border">
+        </div>
+  
+        <div class="trip-input">
+          <label for="travel-date"><h3>Departing</h3></label>
+          <span class="focus-border">
+          <input type="date" id="departing-date" name="travel-date" min="2019-12-31" max="2022-12-31">
+        </div>
+        <div class="trip-input">
+          <label for="return-date"><h3>Returning</h3></label>
+          <span class="focus-border">
+          <input type="date" id="returning-date" name="return-date" min="2019-12-31" max="2022-12-31">
         </div>
       </div>
-
-      <div class="destination-details">
-        <label for="new-city"><h3>I'm going to:</h3></label>
-        <input type="new-text" id="travel-to-city"
-                placeholder="Enter Location Here">
-        <span class="focus-border">
-      </div>
-
-      <div class="date-entry">
-        <label for="travel-date"><h3>Departing</h3></label>
-        <span class="focus-border">
-        <input type="date" id="new-travel-date" min="2019-12-31" max="2022-12-31">
-      </div>
+      <div id="action-buttons-container">
         <button name="button" id="save-trip-button" onclick="Client.handleSubmit(event)">Save Trip</button>
       </div>
-      
-      <div class="travel-details" id="next-trip-holder">
-        
-
+      <div id="trip-results-container">
+                        
       </div>
-      <img src="" id="trip-image">
-      
+          
       </div>
-    </div>
-    
+         
+          
+    <script>
+      // Check that service workers are supported
+      if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js');
+        });
+      }   
+    </script>
   </body>
 </html>
