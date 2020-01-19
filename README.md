@@ -5,9 +5,9 @@ A website that shows you information related to your travel destination and depa
 
 This project expects certain environment variables to be provided in the `.env` file in project root directory
 
-    - DARK_SKY_KEY
-    - GEO_USERNAME
-    - PIXABAY_KEY
+    - darkSkyApiKey
+    - geonamesUserName
+    - pixabayApiKey
 
 Keys can be obtained from: [Dark Sky API](https://darksky.net/dev), [GeoNames API](http://www.geonames.org/export/web-services.html) & [Pixabay API](https://pixabay.com/api/docs)
  
@@ -20,9 +20,9 @@ Keys can be obtained from: [Dark Sky API](https://darksky.net/dev), [GeoNames AP
 
 3. Create a new .env file and containing mentioned environment variables:
 
-    - DARK_SKY_KEY
-    - GEO_USERNAME
-    - PIXABAY_KEY
+    - darkSkyApiKey
+    - geonamesUserName
+    - pixabayApiKey
 
 4. Run: `npm run start` or `yarn run start`
     
